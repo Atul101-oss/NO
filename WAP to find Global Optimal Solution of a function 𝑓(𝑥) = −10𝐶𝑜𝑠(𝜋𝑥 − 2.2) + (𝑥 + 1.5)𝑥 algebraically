@@ -1,0 +1,21 @@
+import sympy as sp
+
+# Define the symbol
+x = sp.symbols('x')
+
+# Define the objective function
+f = -10 * sp.cos(sp.pi * x - 2.2) + (x + 1.5) * x
+
+# Find the critical points by setting the derivative equal to zero
+derivative = sp.diff(f, x)
+critical_points = sp.solve(derivative, x)
+
+# Evaluate the function at the critical points and endpoints
+function_values = [f.subs(x, point) for point in critical_points] + [f.subs(x, -5), f.subs(x, 5)]
+
+# Find the global optimal solution (maximum)
+global_optimal_solution = max(zip(critical_points + [-5, 5], function_values), key=lambda x: x[1])
+
+print(f"Critical Points: {critical_points}")
+print(f"Function Values: {function_values}")
+print(f"Global Optimal Solution: x = {global_optimal_solution[0]}, f(x) = {global_optimal_solution[1]}")
